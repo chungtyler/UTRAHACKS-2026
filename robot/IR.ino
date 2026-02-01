@@ -18,7 +18,7 @@ void IR_read() {
 }
 
 int convert_to_binary(int signal, int threshold) {
-  if (signal > threshold) {
+  if (signal < threshold) {
     return 1;
   } else {
     return 0;

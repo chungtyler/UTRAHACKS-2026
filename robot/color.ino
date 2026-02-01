@@ -1,3 +1,5 @@
+#include <string.h>
+
 // Color sensor pinout
 int S0 = 13;
 int S1 = 12;
@@ -33,56 +35,75 @@ void color_begin() {
   pinMode(sensor_out, INPUT);
 
   //Frequency Scaling
-  digitalWrite(S0, HIGH);
-  digitalWrite(S1, LOW);
+  digitalWrite(S0, LOW);
+  digitalWrite(S1, HIGH);
 }
 
-color_sensor detect_colors() {
-  color_sensor colors = {0, 0, 0};
-  if (red_color > green_color && red_color > blue_color) {
-    colors.is_red = 1;
-  }
-  if (green_color > red_color && green_color > blue_color) {
-    colors.is_green = 1;
-  }
-  if (blue_color > red_color && blue_color > green_color) {
-    colors.is_blue = 1;
+String get_colors() {
+  if (
+    red_color > 1500 &&
+    blue_color > 1500 &&
+    green_color > 1500
+  ) {
+    return "black";
+  } else if (
+    red_color < 1000 &&
+    blue_color < 1000 &&
+    green_color < 1000
+  ) {
+    return "white";
+  } else {
+    if (red_color < green_color && red_color < blue_color && red_color) {
+      return "red";
+    }
+    if (green_color < red_color && green_color < blue_color) {
+      return "green";
+    }
+    if (blue_color < red_color && blue_color < green_color) {
+      return "blue";
+    }
   }
 
-  return colors;
+  return "IDK";
 }
 // Get sensor readings
 void color_read() {
   // Red filter
   digitalWrite(S2, LOW);
   digitalWrite(S3, LOW);
-  delay(sensor_read_delay);
+  //delay(sensor_read_delay);
 
-  red_frequency = pulseIn(sensor_out, LOW, 25000);
+  red_frequency = pulseIn(sensor_out, LOW);
   red_color = red_frequency;//map(red_frequency, red_min, red_max, 255, 0);
+  delay(sensor_read_delay);
 
   // Green filter
   digitalWrite(S2, HIGH);
   digitalWrite(S3, HIGH);
-  delay(sensor_read_delay);
+  //delay(sensor_read_delay);
 
-  green_frequency = pulseIn(sensor_out, LOW, 25000);
+  green_frequency = pulseIn(sensor_out, LOW);
   green_color = green_frequency;//map(green_frequency, green_min, green_max, 255, 0);
+  delay(sensor_read_delay);
 
   // Blue filter
   digitalWrite(S2, LOW);
   digitalWrite(S3, HIGH);
-  delay(sensor_read_delay);
+  //delay(sensor_read_delay);
 
-  blue_frequency = pulseIn(sensor_out, LOW, 25000);
+  blue_frequency = pulseIn(sensor_out, LOW);
   blue_color = blue_frequency;//map(blue_frequency, blue_min, blue_max, 255, 0);
+  delay(sensor_read_delay);
+  print_colors();
+
+  delay(500);
 }
 
 void print_colors() {
   Serial.print("Green: ");
   Serial.print(green_color);
-  Serial.print("Red: ");
+  Serial.print(" Red: ");
   Serial.print(red_color);
-  Serial.print("Blue: ");
+  Serial.print(" Blue: ");
   Serial.println(blue_color);
 }

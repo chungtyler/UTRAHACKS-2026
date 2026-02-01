@@ -3,7 +3,7 @@
 MotorClass motorL(11, 9, 10);
 MotorClass motorR(3, 5, 6);
 
-int motor_speed = 150;
+int motor_speed = 105;
 
 void motor_begin() {
   motorL.begin();
@@ -20,11 +20,11 @@ void go_backward() {
 }
 
 void turn_left() {
-  motorL.rotate(2, motor_speed); motorR.rotate(3,motor_speed);
+  motorL.rotate(3, motor_speed); motorR.rotate(2,motor_speed);
 }
 
 void turn_right() {
-  motorL.rotate(3, motor_speed);motorR.rotate(2, motor_speed);
+  motorL.rotate(2, motor_speed);motorR.rotate(3, motor_speed);
 }
 
 int getMotorState(double value) {
