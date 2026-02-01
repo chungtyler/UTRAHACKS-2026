@@ -14,21 +14,21 @@ void section1_partA() {
     }
   }
 
-  // Green line -> Blue Box
-  while (true) {
-    line_track();
-    color = get_colors();
-    if (color == "blue") {
-      pick_up_box_sequence();
-      delay(100);
-      rotate(-180);
-      drop_off_box_sequence();
-      break;
-    }
-  }
+  // // Green line -> Blue Box
+  // while (true) {
+  //   line_track();
+  //   color = get_colors();
+  //   if (color == "blue") {
+  //     pick_up_box_sequence();
+  //     delay(100);
+  //     rotate(-180);
+  //     drop_off_box_sequence();
+  //     break;
+  //   }
+  // }
 
   // Blue Box -> End of Black Ramp
-  go_forward_for_duration(4);
+  //go_forward_for_duration(4);
   while (true) {
     line_track();
     color = get_colors();

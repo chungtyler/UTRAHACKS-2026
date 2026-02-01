@@ -32,18 +32,24 @@ void drop_off_box_sequence() {
 }
 
 void rotate_to_wall() {
-  double previous_distance = 999999999;
+  double previous_distance2 = 999999999;
   double distance;
+  previous_distance = 0;
+  int counter;
 
   while (true) {
     turn_right();
     delay(10);
-    distance = read_distance();
+    distance = max(60, filtered_distance());
 
-    if (distance < previous_distance) {
-      previous_distance = distance;
+    if ((distance < previous_distance2) && (abs(distance - previous_distance2) < 0.1)) {
+      previous_distance2 = distance;
     } else {
-      break;
+      counter++;
+      if (counter > 4) {
+        stop_for_duration(1);
+        break;
+      }
     }
   }
 }

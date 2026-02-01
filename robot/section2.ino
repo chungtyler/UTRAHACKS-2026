@@ -2,12 +2,11 @@ void section2() {
 
   // Line -> Blue Box
   String color;
-  int counter = 0;
   while (true) {
     line_track();
     color = get_colors();
     Serial.println(color);
-    if (color == "red") {
+    if (color == "blue") {
       pick_up_box_sequence();
       break;
     }
@@ -18,7 +17,7 @@ void section2() {
   while (true) {
     line_track();
     distance = read_distance();
-    if (distance < 11) {
+    if (distance < 16) {
       go_around();
       break;
     }
@@ -28,7 +27,7 @@ void section2() {
   while (true) {
     line_track();
     distance = read_distance();
-    if (distance < 11) {
+    if (distance < 16) {
       go_around();
       break;
     }
@@ -38,29 +37,29 @@ void section2() {
   while (true) {
     line_track();
     color = get_colors();
-    if (color == "red") {
+    if (color == "blue") {
       drop_off_box_sequence();
       break;
     }
   }
 
-//   // ramp -> start
-//   while (true) {
-//     line_track();
-//     color = get_colors();
-//     if (color == "black") {
-//       stop_for_duration(1);
-//       break;
-//     }
-//   }
+  // red -> start
+  while (true) {
+    line_track();
+    color = get_colors();
+    if (color == "black") {
+      stop_for_duration(2);
+      break;
+    }
+  }
 
-//   rotate(180);
-// }
+  rotate(180);
+}
 
 void go_around() {
-  rotate(90);
-  go_forward_for_duration(1.7);
-  rotate(-90);
+  rotate(45);
+  go_forward_for_duration(2.2);
+  rotate(-45);
   //go_forward_for_duration(1.5);
   //rotate(-90);
   

@@ -5,12 +5,14 @@ void setup() {
   color_begin();
   ultrasonic_begin();
 
-  lift_fork();
+  //lift_fork();
   // Call code once
   //section1();
-  section2();
+  //section2();
   //delay(500);
-  //rotate(90);
+  //rotate(180);
+  delay(500);
+  rotate_to_wall();
 }
 
 void loop() {

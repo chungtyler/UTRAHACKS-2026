@@ -6,7 +6,7 @@ MotorClass motorR(3, 5, 6);
 int motor_speed = 105;
 double turn_45_duration = 575 / 105 * motor_speed;
 double turn_90_duration = 800 / 105 * motor_speed;
-double turn_180_duration = 1900 / 105 * motor_speed;
+double turn_180_duration = 1700 / 105 * motor_speed;
 
 void motor_begin() {
   motorL.begin();
