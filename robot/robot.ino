@@ -5,20 +5,10 @@ void setup() {
   color_begin();
   ultrasonic_begin();
 
-  //lift_fork();
-  // Call code once
+  lift_fork();
   //section1();
-  //section2();
-  //delay(500);
-  //rotate(180);
-  delay(500);
-  rotate_to_wall();
+  section2();
 }
 
 void loop() {
-  //IR_read();
-  //delay(100);
-  // String color = get_colors();
-  // Serial.println(color);
-  // delay(100);
 }
