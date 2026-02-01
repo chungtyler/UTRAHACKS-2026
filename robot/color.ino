@@ -1,5 +1,3 @@
-#include <string.h>
-
 // Color sensor pinout
 int S0 = 13;
 int S1 = 12;
@@ -20,12 +18,14 @@ int blue_color = 0;
 int sensor_read_delay = 20;
 
 // Calibration
-int red_min = 0;
-int red_max = 0;
-int green_min = 0;
-int green_max = 0;
-int blue_min = 0;
-int blue_max = 0;
+int black_max = 700;
+int white_min = 600;
+// int red_min = 0;
+// int red_max = 0;
+// int green_min = 0;
+// int green_max = 0;
+// int blue_min = 0;
+// int blue_max = 0;
 
 void color_begin() {
   pinMode(S0, OUTPUT);
@@ -40,31 +40,21 @@ void color_begin() {
 }
 
 String get_colors() {
-  if (
-    red_color > 1500 &&
-    blue_color > 1500 &&
-    green_color > 1500
-  ) {
+  color_read();
+  if (red_color > black_max && blue_color > black_max && green_color > black_max) {
     return "black";
-  } else if (
-    red_color < 1000 &&
-    blue_color < 1000 &&
-    green_color < 1000
-  ) {
+  } else if (red_color < white_min && blue_color < white_min && green_color < white_min) {
     return "white";
   } else {
-    if (red_color < green_color && red_color < blue_color && red_color) {
+    if (red_color < green_color && red_color < blue_color) {
       return "red";
-    }
-    if (green_color < red_color && green_color < blue_color) {
+    } else if (green_color < red_color && green_color < blue_color) {
       return "green";
-    }
-    if (blue_color < red_color && blue_color < green_color) {
+    } else if (blue_color < red_color && blue_color < green_color) {
       return "blue";
     }
   }
-
-  return "IDK";
+  return "unknown";
 }
 // Get sensor readings
 void color_read() {
@@ -94,9 +84,9 @@ void color_read() {
   blue_frequency = pulseIn(sensor_out, LOW);
   blue_color = blue_frequency;//map(blue_frequency, blue_min, blue_max, 255, 0);
   delay(sensor_read_delay);
-  print_colors();
+  //print_colors();
 
-  delay(500);
+  //delay(100);
 }
 
 void print_colors() {

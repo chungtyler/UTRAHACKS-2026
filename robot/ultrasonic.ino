@@ -1,14 +1,15 @@
-int trigger_pin = 0;
-int echo_pin = 1;
+int trigger_pin = 12;
+int echo_pin = 13;
 
 double previous_distance = 0;
+double alpha = 0.99;
 
 void ultrasonic_begin() {
   pinMode(trigger_pin, OUTPUT);
   pinMode(echo_pin, INPUT);
 }
 
-double filtered_distance(double alpha) {
+double filtered_distance() {
   double distance = read_distance();
   double filtered_distance = alpha * previous_distance + (1-alpha) * distance;
   previous_distance = filtered_distance;
