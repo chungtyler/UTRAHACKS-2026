@@ -25,7 +25,19 @@ void setup() {
 }
 
 void loop() {
-  line_track();
+  //line_track();
+  IR_read();
+  follow_line();
+}
+
+void follow_line() {
+   if (IRL_signal == HIGH && IRR_signal == HIGH) { //Forward
+    go_forward();
+  } else if (IRL_signal == LOW && IRR_signal == HIGH) { //Turn Left
+    turn_left();
+  } else if (IRL_signal == HIGH && IRR_signal == LOW) { //Turn Left
+    turn_right();
+  }
 }
 
 void line_track() {
@@ -40,7 +52,7 @@ void line_track() {
     
     if (!IRL_signal) {
       turn_left();
-    } else {
+    } else if (!IRR_signal) {
       turn_right();
     }
 
