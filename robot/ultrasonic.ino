@@ -1,5 +1,5 @@
-int trigger_pin = 12;
-int echo_pin = 13;
+int trigger_pin = 0;
+int echo_pin = 1;
 
 double previous_distance = 0;
 

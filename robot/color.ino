@@ -1,9 +1,9 @@
 // Color sensor pinout
-int S0 = 8;
-int S1 = 7;
-int S2 = 9;
-int S3 = 10;
-int sensor_out = 11;
+int S0 = 13;
+int S1 = 12;
+int S2 = 8;
+int S3 = 7;
+int sensor_out = 2;
 
 // Sensor readings
 int red_frequency = 0;

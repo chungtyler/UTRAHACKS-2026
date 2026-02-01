@@ -1,7 +1,7 @@
 #include "MotorClass.h"
 
-MotorClass motorL(4, 10, 9);
-MotorClass motorR(11, 6, 5);
+MotorClass motorL(11, 9, 10);
+MotorClass motorR(3, 5, 6);
 
 int motor_speed = 150;
 
@@ -11,7 +11,8 @@ void motor_begin() {
 }
 
 void go_forward() {
-  motorL.rotate(3, motor_speed); motorR.rotate(3, motor_speed);
+  motorL.rotate(3, motor_speed); 
+  motorR.rotate(3, motor_speed);
 }
 
 void go_backward() {
